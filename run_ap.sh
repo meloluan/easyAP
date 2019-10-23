@@ -112,7 +112,7 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 ###########
 ########## start ###########
 xterm -hold -bg "#000000" -fg "#FFFFFF" -title "log" -geometry 80x90+620+2 -e watch -n1 tail -n20 /var/log/dnsmasq.log /var/lib/misc/dnsmasq.leases &
-xterm -hold -bg "#000000" -fg "#FFFFFF" -title "hostapd" -geometry 80x90+0+900  -e hostapd /etc/hostapd/hostapd.conf
+xterm -hold -bg "#000000" -fg "#FFFFFF" -title "hostapd" -geometry 80x90+0+900  -e hostapd $CONF_FILE_HOSTAPD
 
 ###########
 ########## stop ###########
