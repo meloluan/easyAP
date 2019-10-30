@@ -3,7 +3,7 @@
 clear
 transparent="\e[0m"
 
-echo -e "\033[1m.: eAP - Easy Access Point v0.1 :.\033[0m"
+echo -e "\033[1m.: eAP - Easy Access Point v0.2 :.\033[0m"
 echo -e "\033[1m.: luan.melo@engenharia.ufjf.br :.\033[0m"
 
 echo ""
