@@ -7,7 +7,7 @@ echo -e "\033[1m.: eAP - Easy Access Point v0.1 :.\033[0m"
 echo -e "\033[1m.: luan.melo@engenharia.ufjf.br :.\033[0m"
 
 echo ""
-echo -ne "hostapd......"
+echo -ne "hostapd........."
 if ! hash hostapd 2>/dev/null; then
 		echo -e "\e[1;31mNot installed"$transparent""
 		exit=1
@@ -15,8 +15,8 @@ else
 	echo -e "\e[1;32mOK!"$transparent""
 fi
 sleep 0.025
-echo -ne "dnsmasq........"
-if ! hash arpspoof 2>/dev/null; then
+echo -ne "dnsmasq........."
+if ! hash dnsmasq 2>/dev/null; then
 		echo -e "\e[1;31mNot installed"$transparent""
 		exit=1
 else
@@ -77,6 +77,10 @@ echo "wpa_key_mgmt=WPA-PSK" >> $CONF_FILE_HOSTAPD
 echo "wpa_pairwise=TKIP CCMP" >> $CONF_FILE_HOSTAPD
 echo "wpa_ptk_rekey=600" >> $CONF_FILE_HOSTAPD
 
+# Unblock wifi interface
+nmcli r wifi off
+rfkill unblock wlan
+
 sleep 1
 
 ip link set $device_ap down
@@ -109,6 +113,7 @@ iptables -A FORWARD -i $device_ap -o $device_host -j ACCEPT
 iptables -t nat -A POSTROUTING -s 10.0.0.0/24 ! -d 10.0.0.0/24  -j MASQUERADE
 
 echo 1 > /proc/sys/net/ipv4/ip_forward
+
 ###########
 ########## start ###########
 xterm -hold -bg "#000000" -fg "#FFFFFF" -title "log" -geometry 80x90+620+2 -e watch -n1 tail -n20 /var/log/dnsmasq.log /var/lib/misc/dnsmasq.leases &
