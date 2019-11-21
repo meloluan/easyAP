@@ -11,9 +11,9 @@ Script to easily raise an access point in linux. Edit the parameters.ini file to
 
 ## Run with docker
 
-> # chmod u+x install.sh
-> # chmod u+x start.sh
-> # chmod u+x stop.sh
-> # ./install.sh
-> # ./start.sh
-> # ./stop.sh
+> $ chmod u+x install.sh
+> $ chmod u+x start.sh
+> $ chmod u+x stop.sh
+> $ ./install.sh
+> $ ./start.sh
+> $ ./stop.sh
