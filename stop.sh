@@ -19,6 +19,8 @@ echo -e "\033[1m.: easyAP - Easy Access Point v0.3 :.\033[0m"
 
 echo ""
 
+CONTAINER_NAME="easyap_container"
+
 # Check if running in privileged mode
 if [ ! -w "/sys" ] ; then
     echo -e "${RED}[ERROR]${END} Not running in privileged mode."
@@ -32,10 +34,10 @@ CONF_FILE_HOSTAPD=$(awk -F "=" '/conf_file_hostapd/ {print $2}' parameters.ini)
 echo ""
 
 echo -e "${BLUE}[INFO]${END} Stopping ${GREEN}easyAP${END}"
-docker stop eap > /dev/null 2>&1 
+docker stop $CONTAINER_NAME > /dev/null 2>&1 
 
 echo -e "${BLUE}[INFO]${END} Removing ${GREEN}easyAP${END}"
-docker rm eap > /dev/null 2>&1 
+docker rm $CONTAINER_NAME > /dev/null 2>&1 
 
 echo -e "${BLUE}[INFO]${END} Removing conf files"
 if [ -e $CONF_FILE_DNSMASQ ]

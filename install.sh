@@ -30,7 +30,7 @@ if [ "$CHECK" != "" ]
 then
     echo -e "${BLUE}[INFO]${END} Docker image ${GREEN}easyAp${END} found"
 else
-    echo -e "${BLUE}[INFO]${END} Docker image ${GREEN}easyAp${END} not found"
-    echo -e "${BLUE}[INFO]${END} Building the ${GREEN}easyAp${END} image..."
-    docker build -q --rm -t easyap
+    echo -e "${RED}[ERROR]${END} Docker image ${GREEN}easyAp${END} not found"
+    echo -e "${BLUE}[INFO]${END} Building the ${GREEN}easyAp${END} image, it might take a while..."
+    docker build -q --rm -t easyap .
 fi

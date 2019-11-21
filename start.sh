@@ -31,7 +31,7 @@ passphrase=$(awk -F "=" '/passphrase/ {print $2}' parameters.ini)
 CONF_FILE_DNSMASQ=$(awk -F "=" '/conf_file_dnsmasq/ {print $2}' parameters.ini)
 CONF_FILE_HOSTAPD=$(awk -F "=" '/conf_file_hostapd/ {print $2}' parameters.ini)
 
-CONTAINER_NAME="eap"
+CONTAINER_NAME="easyap_container"
 
 echo -e "${BLUE}[INFO]${END} Using AP in "$device_ap
 echo ""
@@ -76,7 +76,10 @@ rfkill unblock wifi
 ip link set $device_ap up
 
 echo -e "${BLUE}[INFO]${END} Starting the ${GREEN}easyAP${END} docker container"
-docker run -dt --name $CONTAINER_NAME --net=bridge --cap-add=NET_ADMIN --cap-add=NET_RAW  -v pos-tests_ap_data:/var/lib/misc/ -v "$CONF_FILE_HOSTAPD":/etc/hostapd/hostapd.conf -v "$CONF_FILE_DNSMASQ":/etc/dnsmasq.conf easyap > /dev/null 2>&1
+docker run -dt --name $CONTAINER_NAME --net=bridge --cap-add=NET_ADMIN --cap-add=NET_RAW  -v pos-tests_ap_data:/var/lib/misc/ easyap
+id=$(docker ps -aqf "name=$CONTAINER_NAME")
+docker cp $CONF_FILE_DNSMASQ $id:/etc/dnsmasq.conf
+docker cp $CONF_FILE_HOSTAPD $id:/etc/hostapd/hostapd.conf
 pid=$(docker inspect -f '{{.State.Pid}}' $CONTAINER_NAME)
 
 ###########
