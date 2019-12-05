@@ -3,11 +3,11 @@ Script to easily raise an access point in linux. Edit the parameters.ini file to
 
 ## Run with bash
 
-* dnsmasq: sudo apt install dnsmasq
-* hostapd: sudo apt install hostapd
-* xterm: sudo apt install xterm
-
-#### Run the script as root
+* sudo apt install dnsmasq
+* sudo apt install hostapd
+* sudo apt install xterm
+* sudo chmod u+x run_ap.sh
+* ./run_ap.sh
 
 ## Run with docker
 
